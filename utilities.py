@@ -1,9 +1,6 @@
 import torch
 from torch.autograd import Variable
-
 from PIL import Image
-
-
 
 def load_image(filename):
     # Load and Return the Image.
@@ -45,3 +42,25 @@ def normalize_image_batch(input_batch):
     input_batch = input_batch / Variable(std)
 
     return input_batch
+
+
+def normalize_image(input_image):
+    # Normalize the Image using the ImageNet Mean and STD.
+    mean = input_image.data.new(input_image.size())
+    std = input_image.data.new(input_image.size())
+
+    mean[0, :, :] = 0.485
+    mean[1, :, :] = 0.456
+    mean[2, :, :] = 0.406
+
+    std[0, :, :] = 0.229
+    std[1, :, :] = 0.224
+    std[2, :, :] = 0.225
+
+    input_image = torch.div(input_image, 255.0)
+    input_image -= Variable(mean)
+    input_image = input_image / Variable(std)
+
+    return input_image
+
+
