@@ -1,1 +1,1 @@
-### PyTorch Nets
+### PyTorch Basic Net
