@@ -103,3 +103,4 @@ ENV/
 
 # Custom Ignores.
 */data/*
+data/
